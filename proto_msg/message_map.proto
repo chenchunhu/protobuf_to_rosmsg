@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package rbk.protocol;
+
+import "google/protobuf/wrappers.proto";
+import "message_header.proto";
+import "message_imu.proto";
+import "message_gnss.proto";
+
+message Message_MapLogData {
+    double robot_odo_x = 1;
+    double robot_odo_y = 2;
+    double robot_odo_w = 3;
+    repeated double laser_beam_dist = 4;
+    repeated double laser_beam_angle = 5;
+    repeated double rssi = 6;
+    Message_Header header = 7;
+}
+message Message_MapOdo {
+    double timestamp = 1;
+    float odo_x = 2;
+    float odo_y = 3;
+    float odo_w = 4;
+    float odo_vx = 5;
+    float odo_vy = 6;
+    float odo_vw = 7;
+}
+message Message_MapLogData3D {
+    double timestamp = 1;
+    repeated float x = 2;
+    repeated float y = 3;
+    repeated float z = 4;
+    repeated uint32 intensity = 5;
+    repeated uint32 timeoffset = 6;
+    repeated uint32 ring = 7;
+    repeated bytes data = 8;
+    repeated float firstAzimuth = 9;
+    repeated float secondAzimuth = 10;
+}
+message Message_MapLog {
+    double laser_pos_x = 1;
+    double laser_pos_y = 2;
+    double laser_pos_z = 3;//由于版本原因里面设置是激光安装yaw角，取激光高度数据从laser_install_height
+    double laser_step = 4;
+    double laser_range_max = 5;
+    repeated Message_MapLogData log_data = 6;
+    string laser_name = 7;
+    double laser_install_height = 8;
+    repeated Message_MapOdo odometer = 9;
+    repeated Message_MapLogData3D log_data3d = 10;
+    double laser_install_yaw = 11;
+    double laser_install_pitch = 12;
+    double laser_install_roll = 13;
+    repeated Message_IMU imu_data = 14;
+    repeated Message_GNSS gnss_data = 15;
+    uint32 lasertype = 16; // lasertype = 1---robosense 16  lasertype = 2----robosense helios   lasertype = 3----velodyne 16
+    float factor = 17;
+    repeated float azimuthcorrection = 18;
+    repeated float verticalcorrection = 19;
+    repeated Message_AllGNSS all_gnss_data = 20; // 支持多个天线设备
+}
+

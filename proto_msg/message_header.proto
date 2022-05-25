@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package rbk.protocol;
+
+message Message_Header {
+    uint64 pub_nsec = 1;
+    uint64 data_nsec = 2;
+    uint64 seq = 3;
+    string frame_id = 4;
+}

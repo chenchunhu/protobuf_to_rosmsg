@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package rbk.protocol;
+
+import "message_header.proto";
+
+message Message_ImuInstallInfo {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+    double qx = 4;
+    double qy = 5;
+    double qz = 6;
+    double qw = 7;
+    double SSF = 8;
+}
+
+message Message_IMU {
+    Message_Header header = 1;
+    double yaw = 2;
+    double roll = 3;
+    double pitch = 4;
+    double acc_x = 5;
+    double acc_y = 6;
+    double acc_z = 7;
+    double rot_x = 8;
+    double rot_y = 9;
+    double rot_z = 10;
+    int32 rot_off_x = 11;
+    int32 rot_off_y = 12;
+    int32 rot_off_z = 13;
+    double qx = 14;
+    double qy = 15;
+    double qz = 16;
+    double qw = 17;
+    Message_ImuInstallInfo install_info = 18;
+}

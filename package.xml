@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>rosmsg_converter</name>
+    <version>0.0.1</version>
+    <description>convert protobuf msg to ros standard msg</description>
+
+    <maintainer email="wugx@seer-group.com">anson</maintainer>
+
+    <license>BSD</license>
+    <author>anson</author>
+
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <build_depend>roscpp</build_depend>
+    <build_depend>roslib</build_depend>
+
+</package>

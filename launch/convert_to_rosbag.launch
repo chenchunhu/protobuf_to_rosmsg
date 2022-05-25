@@ -1,0 +1,29 @@
+<launch>
+    <arg name="input_file_path" default="/home/anson/sda/rawmap/3d/2022-05-17_18-41-43/robokit_2022-05-17_18-41-43.0.rawmap"/>
+    <arg name="output_rosbag_path" default="/home/anson/sda/rosbag/robokit_2022-05-17_18-41-43.0.bag"/>
+
+    <!--  外参设置：imu到车体的位姿变换 平移向量 -->
+    <rosparam param="t_imu2base">[0.42, 0.1, 0.49]</rosparam>
+    <!--  外参设置：imu到车体的位姿变换 旋转矩阵 [roll, pitch, yaw] 单位：deg -->
+    <rosparam param="rpy_imu2base">[0., 0., 0.]</rosparam>
+
+    <!--  外参设置：lidar到车体的位姿变换 平移向量 -->
+    <rosparam param="t_lidar2base">[0.66, -0.007, 0.7265]</rosparam>
+    <!--  外参设置：lidar到车体的位姿变换 旋转矩阵(YPR) [roll, pitch, yaw] 单位：deg -->
+    <rosparam param="rpy_lidar2base">[0.0, 0., -45.]</rosparam>
+
+    <node pkg="rosmsg_converter" type="rosmsg_converter" name="rosmsg_converter_node" args="$(arg input_file_path) $(arg output_rosbag_path)" output="screen">
+        <!--
+            rawmap文件中的激光数据格式 0：raw data（新版本，更小数据体积） 1：点云（老版本，体积更大）
+            格式0默认输出的数据类型为normal
+        -->
+        <param name="input_lidar_msg_type" value="0" type="int"/>
+        <!--
+            转换出的激光数据类型：0: normal - 每个点的时间由offset构成
+                              1: helios - 每个点的时间是真实的时间，但是helios的时间需要额外处理
+        -->
+        <param name="output_lidar_type" value="1" type="int"/>
+        <!-- 使用上面定义的外参转换 -->
+        <param name="use_defined_extrinsic" value="false" type="bool"/>
+    </node>
+</launch>

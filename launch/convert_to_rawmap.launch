@@ -1,0 +1,25 @@
+<launch>
+    <arg name="input_file_path" default="/home/anson/sda/rosbag/Robokit_2021-11-02_16-56-02.bag"/>
+    <arg name="output_rawmap_path" default="/home/anson/sda/rawmap/Robokit_2021-11-02_16-56-02_converted.rawmap"/>
+
+    <!--  外参设置：imu到车体的位姿变换 平移向量 -->
+    <rosparam param="t_imu2base">[0.42, 0.1, 0.49]</rosparam>
+    <!--  外参设置：imu到车体的位姿变换 旋转矩阵 [roll, pitch, yaw] 单位：deg -->
+    <rosparam param="rpy_imu2base">[0., 0., 0.]</rosparam>
+
+    <!--  外参设置：lidar到车体的位姿变换 平移向量 -->
+    <rosparam param="t_lidar2base">[0.66, -0.007, 0.7265]</rosparam>
+    <!--  外参设置：lidar到车体的位姿变换 旋转矩阵(YPR) [roll, pitch, yaw] 单位：deg -->
+    <rosparam param="rpy_lidar2base">[0.0, 0., -45.]</rosparam>
+
+    <node pkg="rosmsg_converter" type="rawmap_converter" name="rawmap_converter_node" args="$(arg input_file_path) $(arg output_rawmap_path)" output="screen">
+        <param name="lidar_topic" value="/converted_points" type="string"/>
+        <param name="imu_topic" value="/imu/raw_data" type="string"/>
+        <!--  部分转换比例：0 ~ 1.0 -->
+        <param name="partial_convert_ratio" value="1.0" type="double"/>
+        <!--  输入激光数据类型：0: normal - 每个点的时间由offset构成
+                            1: helios - 每个点的时候是真实的时间，但是helios的时间需要额外处理
+                            -->
+        <param name="input_lidar_type" value="1" type="int"/>
+    </node>
+</launch>
