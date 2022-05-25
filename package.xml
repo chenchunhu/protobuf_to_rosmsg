@@ -4,7 +4,7 @@
     <version>0.0.1</version>
     <description>convert protobuf msg to ros standard msg</description>
 
-    <maintainer email="wugx@seer-group.com">anson</maintainer>
+    <maintainer email="1175039591@qq.com">cch</maintainer>
 
     <license>BSD</license>
     <author>anson</author>
