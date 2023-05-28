@@ -39,6 +39,7 @@ find_package(catkin REQUIRED COMPONENTS
         pcl_ros
         tf
         cv_bridge
+        rospy
         )
 #message(STATUS "catkin_INCLUDE_DIRS: ${catkin_INCLUDE_DIRS}")
 #message(STATUS "catkin_LIBRARIES: ${catkin_LIBRARIES}")
