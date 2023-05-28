@@ -38,6 +38,7 @@ find_package(catkin REQUIRED COMPONENTS
         nav_msgs
         pcl_ros
         tf
+        rospy
         )
 #message(STATUS "catkin_INCLUDE_DIRS: ${catkin_INCLUDE_DIRS}")
 #message(STATUS "catkin_LIBRARIES: ${catkin_LIBRARIES}")
